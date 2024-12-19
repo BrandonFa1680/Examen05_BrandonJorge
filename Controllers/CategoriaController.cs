@@ -12,7 +12,7 @@ namespace Examen05_BrandonJorge.Controllers
     public class CategoriaController : ControllerBase
     {
         [HttpGet]
-        public List<CategoriaResponse> ListarProductos()
+        public List<CategoriaResponse> ListarCategorias()
         {
             using (var context = new DemoContext())
             {
@@ -29,7 +29,7 @@ namespace Examen05_BrandonJorge.Controllers
         }
 
         [HttpGet]
-        public List<CategoriaResponse> ListarProductoxID(int id)
+        public List<CategoriaResponse> ListarCategoriasxID(int id)
         {
             using (var context = new DemoContext())
             {
@@ -46,7 +46,7 @@ namespace Examen05_BrandonJorge.Controllers
         }
 
         [HttpPost]
-        public bool InsertarProducto(CategoriaRequest request)
+        public bool InsertarCategorias(CategoriaRequest request)
         {
             try
             {
