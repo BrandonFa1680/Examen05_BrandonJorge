@@ -12,19 +12,13 @@ namespace Examen05_BrandonJorge.Controllers
     public class CategoriaController : ControllerBase
     {
         [HttpGet]
-        public List<CategoriaResponse> ListarCategorias()
+        public List<Categoria> ListarCategorias()
         {
             using (var context = new DemoContext())
             {
-                var productos = context.Productos.ToList();
-                var categorias = context.Categorias.ToList();
-                var response = categorias.Select(x => new CategoriaResponse
-                {
-                    CategoriaId = x.CategoriaId,
-                    Nombre = x.NombreCategoria,
-                    Descripcion = x.Descripcion
-                }).ToList();
-                return response;
+                var categorias = context.Categorias.Include(x => x.Productos).ToList();
+
+                return categorias;
             }
         }
 
@@ -33,13 +27,15 @@ namespace Examen05_BrandonJorge.Controllers
         {
             using (var context = new DemoContext())
             {
-                var categorias = context.Categorias.ToList();
+                var categorias = context.Categorias.Include(x => x.Productos).ToList();
                 var response = categorias.Where(x => x.CategoriaId == id).Select(x =>
                 new CategoriaResponse
                 {
                     CategoriaId = x.CategoriaId,
                     Nombre = x.NombreCategoria,
-                    Descripcion = x.Descripcion
+                    Descripcion = x.Descripcion,
+                    Productos = x.Productos
+                    
                 }).ToList();
                 return response;
             }
