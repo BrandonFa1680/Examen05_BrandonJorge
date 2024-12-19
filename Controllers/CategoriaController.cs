@@ -17,7 +17,7 @@ namespace Examen05_BrandonJorge.Controllers
             using (var context = new DemoContext())
             {
                 var productos = context.Productos.ToList();
-                var categorias = context.Categorias.Include(p => p.).ToList();
+                var categorias = context.Categorias.ToList();
                 var response = categorias.Select(x => new CategoriaResponse
                 {
                     CategoriaId = x.CategoriaId,
